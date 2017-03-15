@@ -44,12 +44,12 @@ def onlyPairAux(numb): return numb%2==0
 
 #exe 9
 
-def charFound(c, s): return  
+def charFound(c, s): return bool(len(list(filter(lambda t:t==c, s))))
 
-def charFoundAux(c): return 
+#def charFoundAux(c): return True
 
 #exe 10
 
 def addHtmlTo(parms): return list(map(addHtmlToAux, parms))
 
-def addHtmlToAux(parm): return "<h1>"+ parm + "</h1"
+def addHtmlToAux(parm): return "<h1>"+ parm + "</h1>"
