@@ -4,7 +4,7 @@ def addSrTo(names): return list(map(lambda c: "Sr. " + c, names))
 
 #Escreva uma função que, dada uma lista de números, calcule 3n*2 + 2/n + 1 para cada número n da lista.
 
-def crazyMath(numbs): return list(map(lambda c: 3*c*2 + 2/c + 1, numbs))
+def crazyMath(numbs): return list(map(lambda c: 3*c**2 + 2/c + 1, numbs))
 
 #Crie uma função que receba uma lista de nomes e retorne outra lista com somente aqueles nomes que terminarem com a letra 'a'.
 
