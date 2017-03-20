@@ -22,7 +22,7 @@ def spaceInStringAux(c): return c == ' '
 
 def crazyMath(numbs): return list(map(crazyMathAux, numbs))
 
-def crazyMathAux(numb): return 3*numb*2 + 2/numb + 1
+def crazyMathAux(numb): return 3*numb**2 + 2/numb + 1
 
 #Escreva uma função que, dada uma lista de números, retorne uma lista com apenas os que forem negativos. Defina uma função auxiliar para ajudar neste exercício.
 
