@@ -19,6 +19,8 @@ def svgImage(w, h, rs):
 def applyStyles(rects, styles):
     return list(zip(rects, itertools.cycle(styles)))
 
+# Reimplemente a função genRects para gerar uma lista com o número correto de retângulos, nas posições corretas, usando os argumentos n, w e h. 
+# A figura produzida deverá ser igual a colors.svg. Use list comprehension.
 # TODO: modifique essa funcao para gerar mais retangulos
 def genRects(n, w, h):
     return [((50.0*x, 0.0),w,h) for x in range(n)]
@@ -28,9 +30,12 @@ def writeFile(fname, contents):
     f.write(contents)
     f.close()
 
+# Note que a lista styles, na função main(), contém strings que especificam as cores dos retângulos. Essa lista é definida com strings fixas (não é gerada por uma função). 
+# Crie uma função para gerar essa lista de cores, tendo no mínimo um parâmetro que defina a quantidade (n) de cores a serem geradas.
 def genStyles(n):
     return ["stroke-width: 3px; fill:rgb"+str((0, 15 * x, 40 * x))+";"+"stroke:black" if x%2==0
-else "stroke-width: 3px; fill: rgb"+str((255 - 25.5 * x, 255 - 25.5 * x, 255 - 25.5 * x))+"; stroke: black" for x in range(n)]
+            else "stroke-width: 3px; fill: rgb"+str((255 - 25.5 * x, 255 - 25.5 * x, 255 - 25.5 * x))+"; stroke: black" 
+            for x in range(n)]
 
 def main():
     maxWidth = 1000
