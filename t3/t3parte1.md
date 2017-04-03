@@ -1,3 +1,8 @@
+# Trabalho 3: Parte 1.
+
+## Exercicio 1.
+
+```
 ?- avo(joao, Y).
    Call: (7) avo(joao, _G331) ? creep  -> Chamada da regra avo verificando quem é neto de 'joao' (caso possua).
    Call: (8) pai(joao, _G407) ? creep  -> Chamada da regra pai verificando quem é filho de 'joao' (caso possua).
@@ -6,8 +11,9 @@
    Fail: (8) pai(jose, _G331) ? creep  -> Retorno negativo da regra pai afirmando que 'jose' não possui filhos.
    Fail: (7) avo(joao, _G331) ? creep  -> Retorno negativo da regra avô afirmando que 'joao' não possui netos (ou não é avô).
 false.
+```
 
-
+```
 ?- avo(roberto, Y).
    Call: (7) avo(roberto, _G1492) ? creep  -> Chamada da regra avo verificando quem é neto de 'roberto' (caso possua).
    Call: (8) pai(roberto, _G1568) ? creep  -> Chamada da regra pai verificando quem é filho de 'roberto' (caso possua).
@@ -26,7 +32,12 @@ Y = marcos ;                               -> Não foram percorridos todos os no
    Exit: (8) pai(julio, mario) ? creep     -> Retorno positivo da regra pai afirmando que 'julio' é pai de 'mario'.
    Exit: (7) avo(roberto, mario) ? creep   -> Retorno positivo da regra avô afirmando que 'roberto' é avô de 'mario'.
 Y = mario.
+```
 
+
+## Exercicio 2.
+
+```
 ?- azulejos(120, A).
    Call: (7) azulejos(120, _G1492) ? creep       -> Chamada da regra azulejos verificando quantos quadrados podem ser montados com os azulejos.
    Call: (8) 120>0 ? creep                       -> Chamada da regra Na>0 verificando se 120 é maior que 0.
@@ -69,3 +80,4 @@ A = 3 ;                                          -> A 3ª chamada ainda pode per
    Fail: (8) azulejos(20, _G1578) ? creep        -> 1º retorno negativo da chamada recurssiva.
    Fail: (7) azulejos(120, _G1492) ? creep       -> Retorno negativo da regra azulejos.
 false.
+```
