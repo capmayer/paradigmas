@@ -1,6 +1,6 @@
 # Trabalho 3: Parte 1.
 
-## Exercicio 1.
+## Exercício 1.
 
 ```
 ?- avo(joao, Y).
@@ -35,7 +35,7 @@ Y = mario.
 ```
 
 
-## Exercicio 2.
+## Exercício 2.
 
 ```
 ?- azulejos(120, A).
