@@ -81,3 +81,56 @@ A = 3 ;                                          -> A 3ª chamada ainda pode per
    Fail: (7) azulejos(120, _G1492) ? creep       -> Retorno negativo da regra azulejos.
 false.
 ```
+
+## Exercício 3.
+Predicado utilizado.
+```
+my_member(M, L) :-
+   L = [H|T],
+   (M = H;
+   my_member(M, T)).
+```
+```
+my_member(x, [a, x, c, x]).
+   Call: (7) my_member(x, [a, x, c, x]) ? creep    -> Chamada da regra my_member verificando se 'x' está na lista.
+   Call: (8) [a, x, c, x]=[_G1569|_G1570] ? creep  -> Chamada de separação head/tail da lista passada.
+   Exit: (8) [a, x, c, x]=[a, x, c, x] ? creep     -> Retorno positivo da separação.
+   Call: (8) x=a ? creep                           -> Chamada da regra de comparação entre head e 'x'.
+   Fail: (8) x=a ? creep                           -> Retorno negativo da regra de comparação.
+   Redo: (7) my_member(x, [a, x, c, x]) ? creep    -> Redo tentando a outra regra possível (acotece devido ao ; entre as regras).
+   Call: (8) my_member(x, [x, c, x]) ? creep       -> 1ª Chamada recurssiva de my_member.
+   Call: (9) [x, c, x]=[_G1572|_G1573] ? creep     -> Chamada de separação head/tail da lista passada.
+   Exit: (9) [x, c, x]=[x, c, x] ? creep           -> Retorno positivo da separação.
+   Call: (9) x=x ? creep                           -> Chamada da regra de comparação entre head e 'x'.
+   Exit: (9) x=x ? creep                           -> Retorno positivo da regra de comparação.
+   Exit: (8) my_member(x, [x, c, x]) ? creep       -> 1º Retorno da chamada recurssiva positivo.
+   Exit: (7) my_member(x, [a, x, c, x]) ? creep    -> Retorno positivo da regra, 'x' está na lista.
+true ;                                             -> Não foram percorridos todos os nodos.
+   Redo: (8) my_member(x, [x, c, x]) ? creep       -> Redo tentando a outra regra possível. 
+   Call: (9) my_member(x, [c, x]) ? creep          -> 2ª Chamada recurssivda de my_member.
+   Call: (10) [c, x]=[_G1575|_G1576] ? creep       -> Chamada de separação head/tail da lista passada.
+   Exit: (10) [c, x]=[c, x] ? creep                -> Retorno positivo da separação.
+   Call: (10) x=c ? creep                          -> Chamada da regra de comparação entre head e 'x'.
+   Fail: (10) x=c ? creep                          -> Retorno negativo da regra de comparação.
+   Redo: (9) my_member(x, [c, x]) ? creep          -> Redo tentando a outra regra possível.
+   Call: (10) my_member(x, [x]) ? creep            -> 3ª Chamada recurssivda de my_member. 
+   Call: (11) [x]=[_G1578|_G1579] ? creep          -> Chamada de separação head/tail da lista passada.
+   Exit: (11) [x]=[x] ? creep                      -> Retorno positivo da separação.
+   Call: (11) x=x ? creep                          -> Chamada da regra de comparação entre head e 'x'.
+   Exit: (11) x=x ? creep                          -> Retorno positivo da regra de comparação.
+   Exit: (10) my_member(x, [x]) ? creep            -> 3º Retorno positivo da chamada recurssiva.
+   Exit: (9) my_member(x, [c, x]) ? creep          -> 2º Retorno positivo da chamada recurssiva.
+   Exit: (8) my_member(x, [x, c, x]) ? creep       -> 1º Retorno positivo da chamada recurssiva.
+   Exit: (7) my_member(x, [a, x, c, x]) ? creep    -> Retorno positivo da regra, 'x' está na lista.
+true ;                                             -> Não foram percorridos todos os nodos.
+   Redo: (10) my_member(x, [x]) ? creep            -> Redo tentando a outra regra.
+   Call: (11) my_member(x, []) ? creep             -> Chamada recurssiva.
+   Call: (12) []=[_G1581|_G1582] ? creep           -> Listá está vazia, a separação falha.
+   Fail: (12) []=[_G1581|_G1582] ? creep           -> Retorno negativo da separação.
+   Fail: (11) my_member(x, []) ? creep             -> Cadeia de retornos negativos.
+   Fail: (10) my_member(x, [x]) ? creep
+   Fail: (9) my_member(x, [c, x]) ? creep
+   Fail: (8) my_member(x, [x, c, x]) ? creep
+   Fail: (7) my_member(x, [a, x, c, x]) ? creep
+false.
+```
