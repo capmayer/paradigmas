@@ -1,6 +1,6 @@
 import re
 
-trace_test = "?- avo(joao, Y).   Call: (7) avo(joao, _G331) ? creep  Call: (8) pai(joao _G407) ? creep  Exit: (8) pai(joao, jose) ? creep   Call: (8) pai(jose, _G331) ? creep  -> Chamada da regra pai ve   Fail: (8) pai(jose, _G331) ? creep  -> Retorno negativo da reg   Fail: (7) avo(joao, _G331) ? creep  -> Retorno negativo da regra avô afirmando qu não é avô). false."
+trace_test = "Call: (7) avo(roberto, _G1492) ? creep  -> Chamada da regra avo verificando quem é neto de 'roberto' (caso possua).   Call: (8) pai(roberto, _G1568) ? creep  -> Chamada da regra pai verificando quem é filho de 'roberto' (caso possua).   Exit: (8) pai(roberto, joao) ? creep    -> Retorno positivo da regra pai afirmando que 'roberto' é pai de 'joao'.   Call: (8) pai(joao, _G1492) ? creep     -> Chamada da regra pai verificando quem é filho de 'joao' (caso possua).   Exit: (8) pai(joao, jose) ? creep       -> Retorno positivo da regra pai afirmando que 'joao' é pai de 'jose'.   Exit: (7) avo(roberto, jose) ? creep "
 
 
 # Nodo class
@@ -9,7 +9,7 @@ class Nodo(object):
     def __init__(self, name="nodo"):
         self.name = name
         self.childs = []
-        self.parent = []
+        self.parent = None
         self.need_exit = False
 
     # add children
@@ -20,7 +20,7 @@ class Nodo(object):
     # add parent
     def add_parent(self, parent):
         assert isinstance(parent, Nodo)
-        self.parent.append(parent)
+        self.parent = parent
 
 
 # parse the trace
@@ -37,14 +37,15 @@ def dive(n1, n2):
 
 # not implemented yet
 def rise(n1):
-    n1.need_exit = False
+    if n1 is not None:
+        n1.need_exit = False
 
 # may be used to get last nodo that need an exit
 def get_nodo_need_exit(nodos):
     return list(filter(lambda x: x.need_exit, nodos))[-1]
 
 # nodos list to controll them
-nodos= []
+nodos = []
 
 # gerate the nodos based in the keyword "call", should be improved soon
 def gerate_nodos(keywords):
@@ -58,7 +59,9 @@ def gerate_nodos(keywords):
             dive(nodo_master, nod1)
             nodo_master = nod1
             c += 1
-        if (key=="exit"):
+        elif (key=="exit"):
+            nodo_master = nod1.parent
+            nod1 = nodo_master
             rise(nodo_master)
     return nodos[0]
 
@@ -67,7 +70,7 @@ def gerate_nodo_tree(nodo):
     tree = {}
     tree['name'] = nodo.name
     if(nodo.parent):
-        tree['parent'] = nodo.parent[0].name
+        tree['parent'] = nodo.parent.name
     else:
         tree['parent'] = nodo.parent
     tree['children'] = []
