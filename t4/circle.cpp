@@ -3,6 +3,53 @@
 
 const double PI = 3.14159;
 
+class Point
+{
+   private:
+     double x;
+     double y;
+
+   public:
+
+     Point()
+     {
+         x = 0;
+         y = 0;
+     }
+
+     Point(double x, double y)
+     {
+         this->x = x;
+         this->y = y;
+     }
+
+
+     void move(double dx, double dy)
+     {
+         this->x += dx;
+         this->y += dy;
+     }
+
+     double distanceTo(Point d)
+     {
+         return std::sqrt((pow((x - d.getX()), 2) + pow((y - d.getY()),2)));
+     }
+
+     double distanceTo(Point* d)
+     {
+         return std::sqrt((pow((x - d->getX()), 2) + pow((y - d->getY()),2)));
+     }
+
+     int getX()
+     {
+         return x;
+     }
+     int getY()
+     {
+         return y;
+     }
+};
+
 
 class Circle {
 private:
