@@ -47,6 +47,9 @@ class WebApplication {
       this->title = title;
       this->subtitle = subtitle;
     };
+    WebApplication (string title){
+      this->title = title;
+    };
     void setTitle(string title){
       this->title = title;
     }
@@ -88,7 +91,6 @@ class Editor {
       Fl_Button* bt_newField;
       Fl_Button* bt_delField;
       Fl_Table* tb_fields;
-      vector<string> config;
 
       WebApplication* wa;
 
@@ -101,6 +103,11 @@ class Editor {
           edit->wa->setField("nome");
           edit->wa->setField("idade");
           edit->gerateTemplate();
+      }
+      static void load_cb(Fl_Widget* w, void* userdata)
+      {
+          Editor* edit = static_cast<Editor*>(userdata);
+          edit->loadCSV(edit, edit->in_file->value());
       }
 
       static void newField_cb(Fl_Widget* w, void* userdata)
@@ -116,20 +123,32 @@ class Editor {
 
       }
 
+
       // Load the data
-      void loadCSV(string file){
+      void loadCSV(Editor* edit, string file){
           ifstream loadingConfigs;
 
           loadingConfigs.open(file + ".csv");
 
           string line;
 
+          string cells[2];
+
           if (loadingConfigs.is_open())
           {
             while (getline(loadingConfigs, line))
             {
-              cout << line << '\n';
-              config.push_back(line);
+              stringstream linestream(line);
+              getline(linestream, cells[0], ':');
+              getline(linestream, cells[1], ':');
+              if(cells[0].compare("TITLE")){
+                wa = new WebApplication(cells[1]);
+                //edit->in_title->value(cells[1]);
+              }
+              if(cells[0].compare("SUBTITLE")){
+                wa->setSubTitle(cells[1]);
+                //edit->in_subtitle->value(cells[1]);
+              }
             }
             loadingConfigs.close();
           }
@@ -144,11 +163,8 @@ class Editor {
           vector<string>::iterator it;
           if (savingConfigs.is_open())
           {
-            for (it = config.begin(); it != config.end(); it++)
-            {
-                cout << *it << '\n';
-                savingConfigs << *it << '\n';
-            }
+            savingConfigs << "TITLE : "<< wa->getTitle() << '\n';
+            savingConfigs << "SUBTITLE : "<< wa->getSubTitle() << '\n';
             savingConfigs.close();
           }
       }
@@ -260,6 +276,7 @@ class Editor {
         window->end();
 
         bt_gerateTemplate->callback(gerateTemplate_cb, (void*)(this));
+        bt_loadTemplate->callback(load_cb, (void*)(this));
         bt_newField->callback(newField_cb, (void*)(this));
         bt_delField->callback(delField_cb, (void*)(this));
 
