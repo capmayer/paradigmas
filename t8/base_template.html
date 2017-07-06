@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
->>>1<<<
+	{0}
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <script language="JavaScript" type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container">
->>>2<<<
+		{1}
     	<div id="list">
     		<table id="table" class="display"></table>
     		<div class="form-group">
@@ -30,7 +30,7 @@
     				<p class="form-control-static" id="seq"></p>
     			</div>
     		</div>
->>>3<<<
+			{2}
     		<div class="form-group">
     			<div class="col-sm-offset-2 col-sm-8">
     				<button class="btn btn-default" id="cancel">Cancel</button>
@@ -82,13 +82,13 @@
 			object=JSON.parse(json);
 //			var note= object.note;
 //			note=note.replace(/\n/g, "<br>");
->>>4<<<
+			{3}
 //			dataSet[seq]=[index, icons, object.stationId, object.price, object.fuelType];
 			index=index+1;
 			seq=seq+1;
 		}
 
->>>5<<<
+		{4}
 //		oTable=$('#table').dataTable({
 //			"data": dataSet,
 //			"columns": [
@@ -121,7 +121,7 @@
 		    location.reload(true);
 		} );
 
->>>6<<<
+		{5}
 //		$('#table tbody').on( 'click', '.glyphicon-edit', function () {
 //		    $('#list').hide();
 //		    var rows = $(this).parents('tr').children();
@@ -135,7 +135,7 @@
 		return seq;
 	}
 
->>>7<<<
+	{6}
 //	function save() {
 //		var d=new Date();
 //		var timestamp=d.getFullYear()+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+("0"+(d.getDate())).slice(-2)+" "+("0"+(d.getHours())).slice(-2)+":"+("0"+(d.getMinutes())).slice(-2)+":"+("0"+(d.getSeconds())).slice(-2)+"."+("0"+(d.getMilliseconds())).slice(-2);
